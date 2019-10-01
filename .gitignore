@@ -1,0 +1,9 @@
+# Vim swap files
+*.sw*
+
+# Mac DS_Store
+*.DS_Store
+
+#Eclipse project stuff
+.settings/
+.project
