@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+  <title>localStorage example</title>
+  <script src="https://gistcdn.githack.com/gunesacar/07098e29bdbcdb3ffe40/raw/eacd6885c9f10ccd97ce4ea425408f341409d3ee/gistfile1.js"></script>
+  <script type="application/javascript">
+    function read_ls() {
+      for(var key in localStorage) {
+        console.log(key + localStorage.getItem(key));
+      }
+    }
+  </script>
+</head>
+<body onload="read_ls()">
+</html>

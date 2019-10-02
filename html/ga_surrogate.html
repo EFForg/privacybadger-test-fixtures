@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+
+	<title>Privacy Badger surrogates integration test page</title>
+
+	<script type="text/javascript">
+var _gaq = _gaq || [];
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = 'https://www.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+	</script>
+
+</head>
+
+<body>
+
+  <iframe id="ifr" name="ifr" src=""></iframe>
+
+  <script type="text/javascript">
+_gaq.push(function() {
+  var pageTracker = _gat._getTrackerByName("");
+  var iframe = document.getElementById('ifr');
+  var srcFrame = pageTracker._getLinkerUrl('ga_surrogate_frame.html');
+  iframe.src = srcFrame;
+});
+  </script>
+
+</body>
+</html>

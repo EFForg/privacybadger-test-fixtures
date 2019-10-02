@@ -1,0 +1,33 @@
+<html>
+<head>
+  <title>Privacy Badger test fixture for testing navigator.doNotTrack</title>
+</head>
+<body>
+  <div id="result"></div>
+  <script type="text/javascript">
+function readNavigatorDoNotTrack() {
+  let result;
+  if (navigator.doNotTrack == "1") {
+    result = "no tracking";
+  } else if (navigator.doNotTrack == "0") {
+    result = "consent given";
+  } else {
+    result = "unset";
+  }
+  result += " (navigator.doNotTrack=" + JSON.stringify(navigator.doNotTrack) + ")";
+  document.getElementById("result").textContent = result;
+}
+setTimeout(readNavigatorDoNotTrack, 500); // delay by 500 ms
+
+let time = 0;
+function printTime() {
+  console.log(`${time} ms: navigator.doNotTrack=` + JSON.stringify(navigator.doNotTrack));
+  if (time < 200 && navigator.doNotTrack != "1" && navigator.doNotTrack != "0") {
+    time++;
+    setTimeout(printTime, 1);
+  }
+}
+printTime();
+  </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script>
+window.addEventListener("load", function () {
+  if (!('serviceWorker' in navigator)) {
+    return;
+  }
+
+  const channel = new BroadcastChannel('sw-messages');
+  channel.addEventListener('message', event => {
+    console.log('Received', event.data);
+    window.WORKER_READY = true;
+  });
+
+  navigator.serviceWorker.register('service_workers.js').then(reg => {
+    console.info("registration success", reg);
+  }).catch(err => {
+    console.error("registration failed:", err);
+  });
+});
+  </script>
+</head>
+<body>
+
+<a href="https://www.netlify.com/docs/">netlify.com</a>
+<br>
+<a href="https://dev.to/aspittel/a-complete-beginners-guide-to-react-2cl6">dev.to</a>
+<br>
+<a href="https://www.example.com">example.com (site w/o service workers)</a>
+
+</body>
+</html>

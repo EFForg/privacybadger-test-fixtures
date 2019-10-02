@@ -1,0 +1,35 @@
+<html>
+<head>
+    <title>Privacy Badger async navigation-related tracker misattribution test page</title>
+    <script type="text/javascript">
+let reload_count = 0;
+if (sessionStorage.getItem("reload_count")) {
+    reload_count = +sessionStorage.getItem("reload_count");
+}
+
+if (reload_count < 25) {
+    sessionStorage.setItem("reload_count", reload_count + 1);
+
+    setTimeout(function () {
+        window.location.reload();
+    }, reload_count * 3);
+
+} else {
+    sessionStorage.clear();
+    window.DONE_RELOADING = true;
+}
+    </script>
+</head>
+<body>
+    <h2>This is a test page for https://github.com/EFForg/privacybadger/pull/1403</h2>
+    <img src="https://raw.githubusercontent.com/EFForg/privacybadger/ec90ae2504e52e448b10fb85f4f8bd0d8b1f679e/src/icons/badger-16.png">
+    <iframe src="https://gistcdn.githack.com/gunesacar/43e2ad2b76fa5a7f7c57/raw/44e7303338386514f1f5bb4166c8fd24a92e97fe/set_ls.html"></iframe>
+    <script type="text/javascript">
+// bypass cache
+let img = document.getElementsByTagName('img')[0];
+img.src = img.src + '?' + Math.random();
+//let iframe = document.getElementsByTagName('iframe')[0];
+//iframe.src = iframe.src + '?' + Math.random();
+    </script>
+</body>
+</html>

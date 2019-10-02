@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>pixel tracking heuristic test resource</title>
+</head>
+
+<body>
+  <span id="main"></span>
+  <script>
+// create and set the tracking cookie
+const trackingCookie = '418299633.1535508492';
+document.cookie = trackingCookie;
+
+// detect url query params for whether or not to load the img w/ cookie substring
+const urlParams = new URLSearchParams(window.location.search);
+
+// set up img tag, src, and cookie substring
+const img = document.createElement("img");
+const cookieSubstr = trackingCookie.substr(0, 12);
+const imgSrc = "https://res.cloudinary.com/jerrick/image/upload/w_768/a3e47wjih6jh8ilxwxcz"
+
+// if url parameter passed in, load img with cookie val in querystring
+if (urlParams.get('trackMe') === "true") {
+  img.src = imgSrc + "?cookie=" + cookieSubstr;
+} else {
+  img.src = imgSrc;
+};
+
+// place img tag on page
+document.getElementById("main").appendChild(img);
+  </script>
+</body>
+</html>
