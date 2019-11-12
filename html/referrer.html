@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Privacy Badger test fixture for the referrer header</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div id="referrer"></div>
+    <script type="text/javascript">
+      (async function () {
+        let response = await fetch("https://httpbin.org/headers");
+        let data = await response.json();
+        document.getElementById("referrer").textContent = (
+          "Referer=" + data.headers.Referer
+        );
+      }());
+    </script>
+  </body>
+</html>
