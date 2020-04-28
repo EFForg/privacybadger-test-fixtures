@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>Cookie test</title>
+  <script type="application/javascript">
+    var cookie_name = "test_cookie";
+    var cookie_rand_val = Math.random().toString(36).substring(10);
+    function set_cookie() {
+        document.cookie = cookie_name+'='+cookie_rand_val+'; expires=Tue, 31 Dec 2050 00:00:00 UTC; path=/';
+    }
+    function check_cookie() {
+        var ck = document.cookie;
+        if ((ck.indexOf(cookie_name) > -1) && 
+            (ck.indexOf(cookie_rand_val) > -1)){
+            document.body.innerHTML = "<p id='result'>PASS</p>";
+        }else {
+            document.body.innerHTML = "<p id='result'>FAIL</p>";
+        }
+    }
+    function test_cookie() {
+        set_cookie();
+        check_cookie();
+    }
+  </script>
+ </head>
+ <body onload="test_cookie()">   
+ </body>
+</html>
