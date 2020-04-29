@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Privacy Badger test fixture for verifying localStorage clobbering</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <h2>Basic</h2>
+    localStorage.getItem("xxx")=<span id="get-item">...</span><br>
+    localStorage.yyy=<span id="get-property">...</span><br>
+
+    <h2>Going through __proto__</h2>
+    localStorage.__proto__.getItem.call(localStorage, "xxx")=<span id="get-item-proto">...</span><br>
+
+    <h2>From inside an about:blank srcdoc</h2>
+    localStorage.getItem("xxx")=<span id="get-item-srcdoc">...</span><br>
+    localStorage.yyy=<span id="get-property-srcdoc">...</span><br>
+
+    <h2>Going through windows.frames</h2>
+    window.frames[0].localStorage.getItem("xxx")=<span id="get-item-frames">...</span><br>
+    window.frames[0].localStorage.yyy=<span id="get-property-frames">...</span><br>
+
+    <script type="text/javascript">
+      // TODO delayed to accomodate race condition (https://crbug.com/478183)
+      setTimeout(function () {
+        localStorage.setItem("xxx", "qwerty");
+        localStorage.yyy = "asdf";
+
+        document.getElementById("get-item").textContent = "" + localStorage.getItem("xxx");
+        document.getElementById("get-property").textContent = "" + localStorage.yyy;
+
+        document.getElementById("get-item-proto").textContent = "" + localStorage.__proto__.getItem.call(localStorage, "xxx");
+      }, 200);
+    </script>
+
+    <iframe src="about:blank" style="display:none" srcdoc="<script>
+      // TODO delayed to accomodate race condition (https://crbug.com/478183)
+      setTimeout(function () {
+        window.parent.document.getElementById('get-item-srcdoc').textContent = '' + localStorage.getItem('xxx');
+        window.parent.document.getElementById('get-property-srcdoc').textContent = '' + localStorage.yyy;
+      }, 200);
+    </script>"></iframe>
+
+    <script type="text/javascript">
+      // TODO delayed to accomodate race condition (https://crbug.com/478183)
+      setTimeout(function () {
+        document.getElementById('get-item-frames').textContent = '' + window.frames[0].localStorage.getItem('xxx');
+        document.getElementById('get-property-frames').textContent = '' + window.frames[0].localStorage.yyy;
+      }, 250);
+    </script>
+  </body>
+</html>
