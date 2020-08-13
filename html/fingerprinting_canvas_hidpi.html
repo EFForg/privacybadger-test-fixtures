@@ -1,13 +1,18 @@
+<!doctype html>
 <html>
 <head>
     <title>Privacy Badger canvas hidpi polyfill test page</title>
 </head>
 <body>
+    <script>
+      // fake HiDPI
+      window.devicePixelRatio = 2;
+    </script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hidpi-canvas@1.0.10/dist/hidpi-canvas.min.js"></script>
     <canvas id="writetome" />
     <script>
-      var canvas = document.getElementById("writetome");
-      var ctx = canvas.getContext("2d");
+      let canvas = document.getElementById("writetome");
+      let ctx = canvas.getContext("2d");
       ctx.font = "30px Arial";
       ctx.fillText("Hello World", 10, 50);
       ctx.fillText("Hello Again", 50, 100);
