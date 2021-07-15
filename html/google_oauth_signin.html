@@ -7,14 +7,23 @@
 
   <body>
 
+    <div id="status"></div>
+    <div id="signout" style="display:none"><a href="#" onClick="signOut(); return false;">Sign out</a></div>
+
   <script>
-    console.log('waiting for user login button to be click')
     function onSignIn(googleUser) {
       let profile = googleUser.getBasicProfile();
       let name = profile.getName();
-      console.log('Name: ' + name);
-      document.body.innerHTML = "<h1>Hello " + name + "! You're signed in.</h1>"
+      document.getElementById('status').textContent = "Hello " + name + "! You're signed in."
+      document.getElementById('signout').style.display = 'block';
     };
+    function signOut() {
+      let auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        document.getElementById('status').textContent = "";
+        document.getElementById('signout').style.display = 'none';
+      });
+    }
   </script>
 
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
