@@ -3,6 +3,23 @@
 <head>
   <meta charset="utf-8">
   <script>
+function load3PScript() {
+  let script = document.createElement('script'),
+    parent = document.documentElement,
+    scriptStatus = document.getElementById('third-party-load-result');
+
+  script.src = "https://privacybadger-tests.eff.org/html/widget_script.js";
+
+  script.onload = function () {
+    scriptStatus.textContent = "success";
+  };
+  script.onerror = function () {
+    scriptStatus.textContent = "error";
+  };
+
+  parent.insertBefore(script, parent.firstChild);
+}
+
 window.addEventListener("load", function () {
   if (!('serviceWorker' in navigator)) {
     return;
@@ -16,6 +33,10 @@ window.addEventListener("load", function () {
 
   navigator.serviceWorker.register('service_workers.js').then(reg => {
     console.info("registration success", reg);
+
+    // let's try loading a third-party script
+    load3PScript();
+
   }).catch(err => {
     console.error("registration failed:", err);
   });
@@ -29,6 +50,9 @@ window.addEventListener("load", function () {
 <a href="https://dev.to/aspittel/a-complete-beginners-guide-to-react-2cl6">dev.to</a>
 <br>
 <a href="https://www.example.com">example.com (site w/o service workers)</a>
+
+<div id="third-party-load-result"></div>
+<div class="pb-type4-test-widget"></div>
 
 </body>
 </html>
