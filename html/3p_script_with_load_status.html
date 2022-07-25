@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script>
+function load3PScript() {
+  let script = document.createElement('script'),
+    parent = document.documentElement,
+    scriptStatus = document.getElementById('third-party-load-result');
+
+  script.src = "https://privacybadger-tests.eff.org/html/widget_script.js";
+
+  script.onload = function () {
+    scriptStatus.textContent = "success";
+  };
+  script.onerror = function () {
+    scriptStatus.textContent = "error";
+  };
+
+  parent.insertBefore(script, parent.firstChild);
+}
+
+window.addEventListener("load", function () {
+  load3PScript();
+});
+  </script>
+</head>
+<body>
+
+<div id="third-party-load-result"></div>
+<div class="pb-type4-test-widget"></div>
+
+</body>
+</html>
