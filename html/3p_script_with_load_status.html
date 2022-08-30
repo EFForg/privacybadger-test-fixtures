@@ -8,7 +8,11 @@ function load3PScript() {
     parent = document.documentElement,
     scriptStatus = document.getElementById('third-party-load-result');
 
-  script.src = "https://privacybadger-tests.eff.org/html/widget_script.js";
+  if ((new URLSearchParams(window.location.search)).get('alt3p')) {
+    script.src = "https://child1.privacybadger-tests.eff.org/html/widget_script.js";
+  } else {
+    script.src = "https://privacybadger-tests.eff.org/html/widget_script.js";
+  }
 
   script.onload = function () {
     scriptStatus.textContent = "success";
