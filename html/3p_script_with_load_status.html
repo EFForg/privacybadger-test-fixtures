@@ -8,13 +8,21 @@ function load3PScript() {
     parent = document.documentElement,
     scriptStatus = document.getElementById('third-party-load-result');
 
-  if ((new URLSearchParams(window.location.search)).get('alt3p')) {
+  let searchParams = new URLSearchParams(window.location.search);
+  if (searchParams.has('alt3p')) {
     script.src = "https://child1.privacybadger-tests.eff.org/html/widget_script.js";
+  } else if (searchParams.has('fingerprintjs')) {
+    script.src = "https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js"
   } else {
     script.src = "https://privacybadger-tests.eff.org/html/widget_script.js";
   }
 
   script.onload = function () {
+    if (searchParams.has('fingerprintjs')) {
+      FingerprintJS.load().then(
+        fp => fp.get().then(
+          res => console.log(res)));
+    }
     scriptStatus.textContent = "success";
   };
   script.onerror = function () {
