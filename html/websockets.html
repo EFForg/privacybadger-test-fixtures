@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+  <title>Privacy Badger WebSockets test page</title>
+</head>
+<body>
+  <div id="result"></div>
+  <script type="text/javascript">
+    (function() {
+      const sock = new WebSocket("wss://ws.postman-echo.com/raw");
+      sock.addEventListener('open', function () {
+        document.getElementById('result').textContent = "success!";
+      });
+      sock.addEventListener('error', function () {
+        document.getElementById('result').textContent = "error!";
+      });
+    }());
+  </script>
+</body>
+</html>
