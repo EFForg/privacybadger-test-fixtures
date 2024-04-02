@@ -11,6 +11,9 @@ var _gaq = _gaq || [];
   ga.onerror = function () {
     document.getElementById('third-party-load-result').textContent = "error";
   };
+  ga.onload = function () {
+    document.getElementById('third-party-load-result').textContent = "success";
+  }
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 	</script>
