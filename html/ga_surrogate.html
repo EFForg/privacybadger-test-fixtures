@@ -8,6 +8,9 @@ var _gaq = _gaq || [];
 (function() {
   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
   ga.src = 'https://www.google-analytics.com/ga.js';
+  ga.onerror = function () {
+    document.getElementById('third-party-load-result').textContent = "error";
+  };
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 	</script>
@@ -17,6 +20,8 @@ var _gaq = _gaq || [];
 <body>
 
   <iframe id="ifr" name="ifr" src=""></iframe>
+
+  <div id="third-party-load-result"></div>
 
   <script type="text/javascript">
 _gaq.push(function() {
