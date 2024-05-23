@@ -48,5 +48,23 @@
         document.getElementById('get-property-frames').textContent = '' + window.frames[0].localStorage.yyy;
       }, 250);
     </script>
+
+    <script type="text/javascript">
+      let time = 0;
+      function printTime() {
+        let results = [
+          localStorage.getItem("xxx"), localStorage.yyy,
+          localStorage.__proto__.getItem.call(localStorage, "xxx"),
+          window.frames[0].localStorage.getItem('xxx'),
+          window.frames[0].localStorage.yyy,
+        ].join(",");
+        console.log(time + " ms: " + results);
+        if (time < 200 && results.replace(/[, ]/g, '')) {
+          time++;
+          setTimeout(printTime, 1);
+        }
+      }
+      printTime();
+    </script>
   </body>
 </html>
