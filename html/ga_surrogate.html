@@ -13,6 +13,7 @@ var _gaq = _gaq || [];
   };
   ga.onload = function () {
     document.getElementById('third-party-load-result').textContent = "success";
+    document.getElementById('script-string').textContent = _gat?._getTrackers?.toString();
   }
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
@@ -25,6 +26,10 @@ var _gaq = _gaq || [];
   <iframe id="ifr" name="ifr" src=""></iframe>
 
   <div id="third-party-load-result"></div>
+
+  <br><br>
+
+  <div id="script-string"></div>
 
   <script type="text/javascript">
 _gaq.push(function() {
