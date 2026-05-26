@@ -8,26 +8,25 @@
   <span id="main"></span>
   <script>
 // create and set the tracking cookie
-const trackingCookie = '418299633.1535508492';
-document.cookie = trackingCookie;
+let tracking_cookie = "somekey=418299633.1535508492";
+document.cookie = tracking_cookie;
 
 // detect url query params for whether or not to load the img w/ cookie substring
-const urlParams = new URLSearchParams(window.location.search);
+let urlParams = new URLSearchParams(window.location.search);
 
 // set up img tag, src, and cookie substring
-const img = document.createElement("img");
-const cookieSubstr = trackingCookie.substr(0, 12);
-const imgSrc = "https://res.cloudinary.com/jerrick/image/upload/w_768/a3e47wjih6jh8ilxwxcz"
+let imgEl = document.createElement("img");
+let img_src = "https://res.cloudinary.com/jerrick/image/upload/w_768/a3e47wjih6jh8ilxwxcz"
 
 // if url parameter passed in, load img with cookie val in querystring
-if (urlParams.get('trackMe') === "true") {
-  img.src = imgSrc + "?cookie=" + cookieSubstr;
+if (urlParams.get("trackMe") === "true") {
+  imgEl.src = img_src + "?cookie=" + tracking_cookie.split('=')[1];
 } else {
-  img.src = imgSrc;
+  imgEl.src = img_src;
 };
 
 // place img tag on page
-document.getElementById("main").appendChild(img);
+document.getElementById("main").appendChild(imgEl);
   </script>
 </body>
 </html>
